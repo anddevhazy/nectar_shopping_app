@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grocery_mart/core/routes/routes.dart';
+import 'package:grocery_mart/features/cart/presentation/bloc/cart_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key, required this.child, required this.routeState});
@@ -84,18 +86,56 @@ class _MainScreenState extends State<MainScreen> {
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Shop'),
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Cart',
+        items: [
+          const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Shop'),
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            label: 'Explore',
           ),
           BottomNavigationBarItem(
+            icon: BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                int itemCount = 0;
+                if (state is Successful) {
+                  itemCount = state.cartItems.fold(
+                    0,
+                    (sum, item) => sum + item.quantity,
+                  );
+                }
+                return Stack(
+                  children: [
+                    const Icon(Icons.shopping_cart),
+                    if (itemCount > 0)
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            '$itemCount',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
+            label: 'Cart',
+          ),
+          const BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Favourite',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Account',
           ),

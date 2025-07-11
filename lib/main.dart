@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_mart/core/routes/routes.dart';
-import 'package:grocery_mart/core/shared/onboarding_screen.dart';
-import 'package:grocery_mart/core/shared/splash_screen.dart';
-import 'package:grocery_mart/features/auth/presentation/pages/login_screen.dart';
-import 'package:grocery_mart/features/shop/presentation/pages/shop_screen.dart';
+import 'package:grocery_mart/main_injection_container.dart' as di;
+import 'package:grocery_mart/features/cart/presentation/bloc/cart_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
+
   runApp(const MyApp());
 }
 
@@ -15,16 +17,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(414, 896),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routerConfig: Routes.router,
-        );
-      },
+    return BlocProvider(
+      create: (context) => di.sl<CartCubit>(),
+      child: ScreenUtilInit(
+        designSize: const Size(414, 896),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerConfig: Routes.router,
+          );
+        },
+      ),
     );
   }
 }
