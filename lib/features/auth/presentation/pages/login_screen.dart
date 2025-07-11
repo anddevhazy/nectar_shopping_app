@@ -4,14 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:grocery_mart/core/theme/colors.dart';
 
 class LoginScreen extends StatefulWidget {
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
+  final TextEditingController? emailController;
+  final TextEditingController? passwordController;
 
-  const LoginScreen({
-    super.key,
-    required this.emailController,
-    required this.passwordController,
-  });
+  const LoginScreen({super.key, this.emailController, this.passwordController});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

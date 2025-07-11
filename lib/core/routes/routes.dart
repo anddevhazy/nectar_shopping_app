@@ -1,82 +1,115 @@
-// class Routes {
-//   static const String loginPath = '/login';
-//   static const String loginName = 'login';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:grocery_mart/core/shared/main_scaffold.dart';
+import 'package:grocery_mart/core/shared/onboarding_screen.dart';
+import 'package:grocery_mart/core/shared/splash_screen.dart';
+import 'package:grocery_mart/features/auth/presentation/pages/login_screen.dart';
+import 'package:grocery_mart/features/shop/presentation/pages/shop_screen.dart';
+import 'package:grocery_mart/features/temp_placeholder/account_screen.dart';
+import 'package:grocery_mart/features/temp_placeholder/cart_screen.dart';
+import 'package:grocery_mart/features/temp_placeholder/explore_screen.dart';
+import 'package:grocery_mart/features/temp_placeholder/favourite_screen.dart';
+import 'package:grocery_mart/features/temp_placeholder/order_accepted_screen.dart';
 
-//   static const String uploadProfilePicturePath = '/uploadProfilePicture';
-//   static const String uploadProfilePictureName = 'uploadProfilePicture';
+class Routes {
+  static const String splashPath = '/splash';
+  static const String splashName = 'splash';
 
-//   static const String pendingDeliveriesPath = '/pendingDeliveries';
-//   static const String pendingDeliveriesName = 'pendingDeliveries';
+  static const String onboardingPath = '/onboarding';
+  static const String onboardingName = 'onboarding';
 
-//   static const String verifyYourEmployeeIdPath = '/verifyYourEmployeeId';
-//   static const String verifyYourEmployeeIdName = 'verifyYourEmployeeId';
+  static const String loginPath = '/login';
+  static const String loginName = 'login';
 
-//   static const String completedPath = '/completed';
-//   static const String completedName = 'completed';
+  static const String shopPath = '/shop';
+  static const String shopName = 'shop';
 
-//   static const String settingsPath = '/settings';
-//   static const String settingsName = 'settings';
+  static const String cartPath = '/cart';
+  static const String cartName = 'cart';
 
-//   static final GlobalKey<NavigatorState> rootNavigatorKey =
-//       GlobalKey<NavigatorState>();
-//   static final GlobalKey<NavigatorState> shellNavigatorKey =
-//       GlobalKey<NavigatorState>();
+  static const String accountPath = '/account';
+  static const String accountName = 'account';
 
-//   static final GoRouter router = GoRouter(
-//     navigatorKey: rootNavigatorKey,
-//     initialLocation: loginPath,
-//     routes: [
-//       GoRoute(
-//         path: loginPath,
-//         name: loginName,
-//         builder: (context, state) => const LoginPage(),
-//       ),
-//       GoRoute(
-//         path: verifyYourEmployeeIdPath,
-//         name: verifyYourEmployeeIdName,
-//         builder: (context, state) {
-//           final rider = state.extra as RiderEntity;
-//           return VerifyYourEmployeeIdPage(rider: rider);
-//         },
-//       ),
-//       GoRoute(
-//         path: uploadProfilePicturePath,
-//         name: uploadProfilePictureName,
-//         builder: (context, state) {
-//           final data = state.extra! as Map<String, dynamic>;
+  static const String explorePath = '/explore';
+  static const String exploreName = 'explore';
 
-//           return UploadProfilePictureScreen(
-//             employeeId: data['employeeId'],
-//             id: data['id'],
-//           );
-//         },
-//       ),
-//       ShellRoute(
-//         navigatorKey: shellNavigatorKey,
-//         builder:
-//             (context, state, child) =>
-//                 MainScreen(routeState: state, child: child),
-//         routes: [
-//           GoRoute(
-//             path: pendingDeliveriesPath,
-//             name: pendingDeliveriesName,
-//             builder: (context, state) => const PendingDeliveriesScreen(),
-//           ),
-//           GoRoute(
-//             path: completedPath,
-//             name: completedName,
-//             builder: (context, state) => const CompletedScreen(),
-//           ),
-//           GoRoute(
-//             path: settingsPath,
-//             name: settingsName,
-//             builder: (context, state) => const SettingsScreen(),
-//           ),
-//         ],
-//       ),
-//     ],
-//     errorBuilder:
-//         (context, state) =>
-//             Scaffold(body: Center(child: Text(state.error.toString()))),
-//   );
-// }
+  static const String favouritePath = '/favourite';
+  static const String favouriteName = 'favourite';
+
+  static const String orderAcceptedPath = '/orderAccepted';
+  static const String orderAcceptedName = 'orderAccepted';
+
+  static final GlobalKey<NavigatorState> rootNavigatorKey =
+      GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> shellNavigatorKey =
+      GlobalKey<NavigatorState>();
+
+  static final GoRouter router = GoRouter(
+    navigatorKey: rootNavigatorKey,
+    // initialLocation: splashPath,
+    initialLocation: shopPath,
+
+    routes: [
+      GoRoute(
+        path: splashPath,
+        name: splashName,
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: loginPath,
+        name: loginName,
+        builder:
+            (context, state) => const LoginScreen(
+              emailController: null,
+              passwordController: null,
+            ),
+      ),
+      GoRoute(
+        path: onboardingPath,
+        name: onboardingName,
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+      ShellRoute(
+        navigatorKey: shellNavigatorKey,
+        builder:
+            (context, state, child) =>
+                MainScreen(routeState: state, child: child),
+        routes: [
+          GoRoute(
+            path: shopPath,
+            name: shopName,
+            builder: (context, state) => const ShopScreen(),
+          ),
+          GoRoute(
+            path: cartPath,
+            name: cartName,
+            builder: (context, state) => const CartScreen(),
+          ),
+          GoRoute(
+            path: orderAcceptedPath,
+            name: orderAcceptedName,
+            builder: (context, state) => const OrderAcceptedScreen(),
+          ),
+          GoRoute(
+            path: explorePath,
+            name: exploreName,
+            builder: (context, state) => const ExploreScreen(),
+          ),
+          GoRoute(
+            path: favouritePath,
+            name: favouriteName,
+            builder: (context, state) => const FavouriteScreen(),
+          ),
+          GoRoute(
+            path: accountPath,
+            name: accountName,
+            builder: (context, state) => const AccountScreen(),
+          ),
+        ],
+      ),
+    ],
+    errorBuilder:
+        (context, state) =>
+            Scaffold(body: Center(child: Text(state.error.toString()))),
+  );
+}
