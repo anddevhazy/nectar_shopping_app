@@ -9,55 +9,77 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
   @override
   Future<void> addToCart(ItemEntity item) async {
-    final prefs = await SharedPreferences.getInstance();
-    final cartItems = await getCartItems();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final cartItems = await getCartItems();
 
-    final existingItemIndex = cartItems.indexWhere(
-      (i) => i.name == item.name && i.imagePath == item.imagePath,
-    );
-    if (existingItemIndex != -1) {
-      final updatedItem = cartItems[existingItemIndex].copyWith(
-        quantity: cartItems[existingItemIndex].quantity + 1,
+      // Check if item already exists in cart
+      final existingItemIndex = cartItems.indexWhere(
+        (i) => i.name == item.name && i.imagePath == item.imagePath,
       );
-      cartItems[existingItemIndex] = updatedItem;
-    } else {
-      cartItems.add(item);
+
+      if (existingItemIndex != -1) {
+        // Update existing item quantity
+        final existingItem = cartItems[existingItemIndex];
+        final updatedItem = ItemModel(
+          name: existingItem.name,
+          description: existingItem.description,
+          price: existingItem.price,
+          imagePath: existingItem.imagePath,
+          quantity: existingItem.quantity + 1,
+        );
+        cartItems[existingItemIndex] = updatedItem;
+      } else {
+        // Add new item to cart
+        final newItem = ItemModel(
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          imagePath: item.imagePath,
+          quantity: item.quantity,
+        );
+        cartItems.add(newItem);
+      }
+
+      // Convert all items to JSON and save
+      final cartJson =
+          cartItems
+              .map(
+                (item) => jsonEncode(
+                  ItemModel(
+                    name: item.name,
+                    description: item.description,
+                    price: item.price,
+                    imagePath: item.imagePath,
+                    quantity: item.quantity,
+                  ).toJson(),
+                ),
+              )
+              .toList();
+
+      await prefs.setStringList(_cartKey, cartJson);
+      print('Cart saved successfully. Items count: ${cartItems.length}');
+    } catch (e) {
+      print('Error adding to cart: $e');
+      throw Exception('Failed to add item to cart: $e');
     }
-
-    final cartJson =
-        cartItems
-            .map(
-              (item) => jsonEncode(
-                (item is ItemModel
-                        ? item
-                        : ItemModel(
-                          name: item.name,
-                          description: item.description,
-                          price: item.price,
-                          imagePath: item.imagePath,
-                          quantity: item.quantity,
-                        ))
-                    .toJson(),
-              ),
-            )
-            .toList();
-
-    await prefs.setStringList(_cartKey, cartJson);
   }
 
   @override
   Future<List<ItemEntity>> getCartItems() async {
-    final prefs = await SharedPreferences.getInstance();
-    final cartJson = prefs.getStringList(_cartKey) ?? [];
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final cartJson = prefs.getStringList(_cartKey) ?? [];
 
-    return cartJson
-        .map((json) => ItemModel.fromJson(jsonDecode(json)))
-        .toList();
-  }
+      print('Retrieved cart items: ${cartJson.length}');
 
-  @override
-  Future<void> removeFromCart(ItemEntity itemEntity) {
-    // TODO: implement removeFromCart
-    throw UnimplementedError();
+      return cartJson
+          .map((json) => ItemModel.fromJson(jsonDecode(json)))
+          .cast<ItemEntity>()
+          .toList();
+    } catch (e) {
+      print('Error getting cart items: $e');
+      return [];
+    }
   }
 }

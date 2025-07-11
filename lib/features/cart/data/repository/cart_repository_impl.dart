@@ -13,8 +13,4 @@ class CartRepositoryImpl implements CartRepository {
   @override
   Future<List<ItemEntity>> getCartItems() async =>
       remoteDataSource.getCartItems();
-
-  @override
-  Future<void> removeFromCart(ItemEntity itemEntity) async =>
-      remoteDataSource.removeFromCart(itemEntity);
 }

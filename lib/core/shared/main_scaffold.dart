@@ -115,6 +115,10 @@ class _MainScreenState extends State<MainScreen> {
                             color: Colors.red,
                             shape: BoxShape.circle,
                           ),
+                          constraints: const BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
+                          ),
                           child: Text(
                             '$itemCount',
                             style: const TextStyle(
@@ -122,6 +126,7 @@ class _MainScreenState extends State<MainScreen> {
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),

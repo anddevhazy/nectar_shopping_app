@@ -7,7 +7,7 @@ import 'package:grocery_mart/features/cart/domain/entities/item_entity.dart';
 import 'package:grocery_mart/features/cart/presentation/bloc/cart_cubit.dart';
 
 Widget buildProductCard(
-  BuildContext context, // Add BuildContext as a parameter
+  BuildContext context,
   String name,
   String subtitle,
   String price,
@@ -77,9 +77,7 @@ Widget buildProductCard(
                   imagePath: imagePath,
                   quantity: 1,
                 );
-                context.read<CartCubit>().addToCart(
-                  item,
-                ); // Now context is defined
+                context.read<CartCubit>().addToCart(item);
               },
               child: Container(
                 width: 45.h,

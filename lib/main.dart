@@ -18,7 +18,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di.sl<CartCubit>(),
+      create: (context) {
+        final cartCubit = di.sl<CartCubit>();
+        // cartCubit.fetchCartItems();
+        return cartCubit;
+      },
       child: ScreenUtilInit(
         designSize: const Size(414, 896),
         minTextAdapt: true,

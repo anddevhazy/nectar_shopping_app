@@ -4,7 +4,6 @@ import 'package:grocery_mart/features/cart/data/repository/cart_repository_impl.
 import 'package:grocery_mart/features/cart/domain/repositories/cart_repository.dart';
 import 'package:grocery_mart/features/cart/domain/usecases/add_to_cart_usecase.dart';
 import 'package:grocery_mart/features/cart/domain/usecases/get_cart_items.dart';
-import 'package:grocery_mart/features/cart/domain/usecases/remove_from_cart_usecase.dart';
 import 'package:grocery_mart/features/cart/presentation/bloc/cart_cubit.dart';
 import 'package:grocery_mart/main_injection_container.dart';
 
@@ -22,10 +21,6 @@ Future<void> cartInjectionContainer() async {
 
   sl.registerLazySingleton<GetCartItemsUseCase>(
     () => GetCartItemsUseCase(repository: sl.call()),
-  );
-
-  sl.registerLazySingleton<RemoveFromCartUsecase>(
-    () => RemoveFromCartUsecase(repository: sl.call()),
   );
 
   //REPOSITORY & DATA SOURCES INJECTION
