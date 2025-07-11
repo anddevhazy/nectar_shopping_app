@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grocery_mart/core/shared/onboarding_screen.dart';
 import 'package:grocery_mart/core/shared/splash_screen.dart';
+import 'package:grocery_mart/features/auth/presentation/pages/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: const OnboardingScreen(),
+          // home: const OnboardingScreen(),
+          // home: const NectarSplashScreen(),
+          home: const LoginScreen(),
         );
       },
     );
