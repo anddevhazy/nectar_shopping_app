@@ -32,7 +32,7 @@ This app implements the following core user flows:
 
 ## 🎥 Demo
 
-[📺 View Demo](https://example.com)
+[📺 View Demo](https://drive.google.com/file/d/1xs3U2g_jnnMKd8EW0oIQRRWaYFyzjDXR/view?usp=sharing)
 
 ---
 

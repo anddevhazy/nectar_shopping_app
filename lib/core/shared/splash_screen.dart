@@ -34,9 +34,9 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _startAnimation() async {
-    await _fadeController.forward(); // Fade in
-    await Future.delayed(const Duration(seconds: 1, milliseconds: 500)); // Hold
-    await _fadeController.reverse(); // Fade out
+    await _fadeController.forward();
+    await Future.delayed(const Duration(seconds: 1, milliseconds: 500));
+    await _fadeController.reverse();
 
     if (mounted) {
       context.goNamed(Routes.onboardingName);
