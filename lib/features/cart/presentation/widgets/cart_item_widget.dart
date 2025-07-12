@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:grocery_mart/core/shared/custom_dialog_widget.dart';
 import 'package:grocery_mart/core/theme/colors.dart';
 import 'package:grocery_mart/core/theme/styled_text.dart';
 import 'package:grocery_mart/features/cart/domain/entities/item_entity.dart';
@@ -16,8 +17,7 @@ class CartItemWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 16.h),
       decoration: BoxDecoration(
-        // color: AppColors.background,
-        color: AppColors.white,
+        color: AppColors.background,
 
         borderRadius: BorderRadius.circular(12.r),
       ),
@@ -137,22 +137,16 @@ class CartItemWidget extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Remove Item'),
-          content: Text('Remove ${item.name} from your cart?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                context.read<CartCubit>().removeFromCart(item);
-                Navigator.of(context).pop();
-              },
-              child: const Text('Remove', style: TextStyle(color: Colors.red)),
-            ),
-          ],
+        return CustomDialog(
+          title: 'Remove Item',
+          content: 'Remove ${item.name} from your cart?',
+          actionText: 'Remove',
+          actionTextColor: Colors.red,
+          onCancel: () => Navigator.of(context).pop(),
+          onAction: () {
+            context.read<CartCubit>().removeFromCart(item);
+            Navigator.of(context).pop();
+          },
         );
       },
     );

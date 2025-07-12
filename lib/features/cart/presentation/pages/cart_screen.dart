@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:grocery_mart/core/shared/custom_dialog_widget.dart';
 import 'package:grocery_mart/core/theme/colors.dart';
 import 'package:grocery_mart/core/theme/styled_text.dart';
 import 'package:grocery_mart/features/cart/presentation/bloc/cart_cubit.dart';
@@ -156,24 +157,17 @@ class CartScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Clear Cart'),
-          content: const Text(
-            'Are you sure you want to remove all items from your cart?',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                context.read<CartCubit>().clearCart();
-                Navigator.of(context).pop();
-              },
-              child: const Text('Clear', style: TextStyle(color: Colors.red)),
-            ),
-          ],
+        return CustomDialog(
+          title: 'Clear Cart',
+
+          content: 'Are you sure you want to clear cart?',
+          actionText: 'Clear',
+          actionTextColor: Colors.red,
+          onCancel: () => Navigator.of(context).pop(),
+          onAction: () {
+            context.read<CartCubit>().clearCart();
+            Navigator.of(context).pop();
+          },
         );
       },
     );
@@ -183,26 +177,18 @@ class CartScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Checkout'),
-          content: const Text('Proceed to checkout?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Checkout feature coming soon!'),
-                  ),
-                );
-              },
-              child: const Text('Proceed'),
-            ),
-          ],
+        return CustomDialog(
+          title: 'Checkout',
+          content: 'Proceed to checkout?',
+          actionText: 'Proceed',
+          actionTextColor: AppColors.primary,
+          onCancel: () => Navigator.of(context).pop(),
+          onAction: () {
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Checkout feature coming soon!')),
+            );
+          },
         );
       },
     );

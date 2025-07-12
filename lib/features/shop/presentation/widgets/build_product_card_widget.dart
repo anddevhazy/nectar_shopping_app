@@ -33,7 +33,6 @@ Widget buildProductCard(
             child: Image.asset(imagePath, fit: BoxFit.contain),
           ),
         ),
-
         SizedBox(height: 30.h),
         StyledText(
           text: name,
@@ -64,7 +63,7 @@ Widget buildProductCard(
               letterSpacing: 0.1.sp,
               height: 18.sp,
             ),
-            GestureDetector(
+            _AnimatedAddButton(
               onTap: () {
                 final item = ItemEntity(
                   name: name,
@@ -75,19 +74,72 @@ Widget buildProductCard(
                 );
                 context.read<CartCubit>().addToCart(item);
               },
-              child: Container(
-                width: 45.h,
-                height: 45.h,
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(17.r),
-                ),
-                child: const Icon(Icons.add, color: Colors.white),
-              ),
             ),
           ],
         ),
       ],
     ),
   );
+}
+
+class _AnimatedAddButton extends StatefulWidget {
+  final VoidCallback onTap;
+
+  const _AnimatedAddButton({required this.onTap});
+
+  @override
+  _AnimatedAddButtonState createState() => _AnimatedAddButtonState();
+}
+
+class _AnimatedAddButtonState extends State<_AnimatedAddButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 1.2,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller.reverse();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _controller.forward(from: 0.0);
+        widget.onTap();
+      },
+      child: ScaleTransition(
+        scale: _scaleAnimation,
+        child: Container(
+          width: 45.h,
+          height: 45.h,
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            borderRadius: BorderRadius.circular(17.r),
+          ),
+          child: const Icon(Icons.add, color: Colors.white),
+        ),
+      ),
+    );
+  }
 }
