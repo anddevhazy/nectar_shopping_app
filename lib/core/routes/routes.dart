@@ -7,7 +7,6 @@ import 'package:grocery_mart/features/auth/presentation/pages/login_screen.dart'
 import 'package:grocery_mart/features/cart/presentation/pages/cart_screen.dart';
 import 'package:grocery_mart/features/shop/presentation/pages/shop_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/account_screen.dart';
-import 'package:grocery_mart/features/temp_placeholder/cart_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/explore_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/favourite_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/order_accepted_screen.dart';
@@ -47,9 +46,8 @@ class Routes {
 
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
-    // initialLocation: splashPath,
-    initialLocation: shopPath,
 
+    initialLocation: splashPath,
     routes: [
       GoRoute(
         path: splashPath,

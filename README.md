@@ -1,137 +1,80 @@
-# Project Name
+# 🛒 GroceryMart – Flutter Shopping App
 
-> An app for shopping groceries, built during the technical assignment state of the MUST hiring process.
+> A grocery shopping mobile app built as part of the technical assessment for the Flutter Developer Intern role at MUST Company.
 
-## Table of Contents
+---
 
-- [Features]( 1. Splash Screen 2. Onboarding Screen 3. Login Screen 4. Browsing through an inventory of groceries to shop through the Shop Screen 5. Adding to cart 6. Proceeding to checkout
-  )
-- [Installation](
+## 📋 Table of Contents
 
-)
+- [Features](#features)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Demo
+---
 
-[📺 Link to demo](https://example.com)
+## ✅ Features
 
-## Installation
+This app implements the following core user flows:
+
+1. **Splash Screen** – App launch branding with smooth transition.
+2. **Onboarding Screen** – Introduction to the app.
+3. **Login Screen** – Email/password form with basic validation.
+4. **Shop Screen** – Browse an inventory of groceries across categories.
+5. **Cart** – Add, remove, and view items in your shopping cart.
+6. **Checkout** – View summary and simulate checkout process.
+7. **Cart Persistence** – Data is retained after app restarts using `SharedPreferences`.
+8. **Animations** – Thoughtfully added animations for enhanced user experience without distracting from usability.
+
+---
+
+## 🎥 Demo
+
+[📺 View Demo](https://example.com)
+
+---
+
+## ⚙️ Installation
+
+### Prerequisites
+
+- Flutter SDK (latest stable)
+- Android Studio or VS Code
+- Android/iOS emulator or real device
+
+### Setup Instructions
 
 ```bash
-git clone https://github.com/yourname/nectar_shopping_app.git
-cd nectar_shopping_app
+# Clone the repository
+git clone https://github.com/yourname/grocerymart_app.git
+cd grocerymart_app
 
 # Install dependencies
-npm install
+flutter pub get
 
-# Start the app
-npm run start
-```
+# Run the app on connected device or emulator
+flutter run
 
-## Usage
 
-```bash
-# Basic usage example
-node index.js --input ./file.txt
-```
+⚠️ Note on Testing Environment
+This app was built and tested entirely on a physical Android device -- ensuring it has:
 
-Explain what the output looks like. Be explicit.
 
-## Configuration
+ - deployment-ready features
 
-```bash
-# .env
-API_KEY=your-key-here
-DEBUG=true
-```
+ - Real-world performance under actual device constraints (RAM, CPU, network)
 
-Use `.env.example` and mention it.
+ - Accurate rendering on real screens (vs. inflated emulator displays)
 
-## API Reference
+ - True behavior for animations, input fields, and gesture handling
 
-```http
-GET /api/users
-Authorization: Bearer <token>
 
-Response:
-{
-  "id": 1,
-  "name": "John Doe"
-}
-```
+For best results, run it on an **Android device or emulator**.
 
-Document ALL endpoints with parameters and responses.
+While the codebase follows Flutter best practices and is cross-platform by design, minor adjustments may be needed to run it smoothly on iOS.
 
-## Development
+> Attempting to run it directly on iOS without adjustments may lead to platform-specific issues not present on Android.
 
-```bash
-# Start development server
-npm run dev
-
-# Linting
-npm run lint
-```
-
-Include repo structure if non-trivial.
-
-## Tests
-
-```bash
-# Run tests
-npm test
-```
-
-Mention framework used (Jest, Mocha, etc.), where test files live, and coverage info if any.
-
-## Troubleshooting
-
-| Problem         | Solution                                |
-| --------------- | --------------------------------------- |
-| Port in use     | Change `PORT` in `.env`                 |
-| Mongo not found | Install MongoDB and ensure it's running |
-| 403 error       | Check your API key and permissions      |
-
-## Contributing
-
-- Fork the project
-- Create your feature branch (`git checkout -b feature/FeatureName`)
-- Commit your changes (`git commit -m 'Add FeatureName'`)
-- Push to the branch (`git push origin feature/FeatureName`)
-- Open a pull request
-
-## License
-
-[MIT](LICENSE)
-
-```
-
----
-
-## 🛑 COMMON MISTAKES YOU’LL AVOID NOW
-
-| Mistake | Fix |
-|--------|-----|
-| “To be added…” | Don’t commit placeholders |
-| No install steps | Include setup, even if it's just `npm install` |
-| No license | Add one or GitHub will mark it as undefined |
-| Too much personal story | README is not a blog |
-| Raw code dumps in usage | Wrap it in fenced code blocks |
-| No screenshots | Add at least one screenshot or GIF for clarity |
-
----
-
-## 🔧 RESOURCES TO GET IT RIGHT
-
-- [Make a README – GitHub Guide](https://www.makeareadme.com/)
-- [Shields.io – For Badges](https://shields.io/)
-- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-- [readme.so – Visual Builder](https://readme.so/)
-- [Choose a License](https://choosealicense.com/)
-
----
-
-## 📌 FINAL WORD
-
-Treat your README like a product pitch. You’re not just showing code—you’re proving you're a developer who **finishes the job professionally**.
-
-If you want me to review a README or generate one from your codebase, drop the code or details. Let’s get it production-grade.
 ```
