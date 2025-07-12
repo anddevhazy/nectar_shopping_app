@@ -4,6 +4,7 @@ import 'package:grocery_mart/core/shared/main_scaffold.dart';
 import 'package:grocery_mart/core/shared/onboarding_screen.dart';
 import 'package:grocery_mart/core/shared/splash_screen.dart';
 import 'package:grocery_mart/features/auth/presentation/pages/login_screen.dart';
+import 'package:grocery_mart/features/cart/presentation/pages/cart_screen.dart';
 import 'package:grocery_mart/features/shop/presentation/pages/shop_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/account_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/cart_screen.dart';

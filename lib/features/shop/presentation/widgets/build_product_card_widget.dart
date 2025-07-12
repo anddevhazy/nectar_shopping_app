@@ -27,17 +27,13 @@ Widget buildProductCard(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Center(
-          child: Container(
+          child: SizedBox(
             width: 80,
             height: 80,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(imagePath),
-                fit: BoxFit.cover,
-              ),
-            ),
+            child: Image.asset(imagePath, fit: BoxFit.contain),
           ),
         ),
+
         SizedBox(height: 30.h),
         StyledText(
           text: name,
