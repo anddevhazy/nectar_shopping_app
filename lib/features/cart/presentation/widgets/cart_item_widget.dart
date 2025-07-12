@@ -15,13 +15,10 @@ class CartItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 16.h),
-      decoration: BoxDecoration(
-        color: AppColors.background,
-
-        borderRadius: BorderRadius.circular(12.r),
-      ),
+      height: 110.h,
+      decoration: BoxDecoration(color: AppColors.background),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
             width: 60.w,
@@ -33,6 +30,7 @@ class CartItemWidget extends StatelessWidget {
 
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 StyledText(
@@ -43,7 +41,7 @@ class CartItemWidget extends StatelessWidget {
                   letterSpacing: 0.sp,
                   height: 1.2,
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 8.h),
                 StyledText(
                   text: item.description,
                   fontSize: 14.sp,
@@ -82,24 +80,32 @@ class CartItemWidget extends StatelessWidget {
             ),
           ),
 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: () => _showRemoveDialog(context),
-                icon: const Icon(Icons.close, size: 20, color: Colors.grey),
-              ),
+          SizedBox(width: 120.w),
 
-              StyledText(
-                text: item.price,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.black,
-                letterSpacing: 0.sp,
-                height: 1.2,
-              ),
-            ],
+          SizedBox(
+            height: 110.h,
+            // width: 120.w,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () => _showRemoveDialog(context),
+                  icon: const Icon(Icons.close, size: 20, color: Colors.grey),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16.h),
+                  child: StyledText(
+                    text: item.price,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                    letterSpacing: 0.sp,
+                    height: 1.2,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

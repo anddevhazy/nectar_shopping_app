@@ -6,7 +6,6 @@ import 'package:grocery_mart/core/theme/colors.dart';
 import 'package:grocery_mart/core/theme/styled_text.dart';
 import 'package:grocery_mart/features/cart/presentation/bloc/cart_cubit.dart';
 import 'package:grocery_mart/features/cart/presentation/widgets/cart_item_widget.dart';
-import 'package:grocery_mart/features/cart/presentation/widgets/checkout_button_widget.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -137,11 +136,50 @@ class CartScreen extends StatelessWidget {
                         ),
                   ),
                 ),
-                CheckoutButtonWidget(
-                  totalPrice: context.read<CartCubit>().getTotalPrice(),
-                  onCheckout: () {
-                    _showCheckoutDialog(context);
-                  },
+                GestureDetector(
+                  onTap: () => _showCheckoutDialog(context),
+                  child: Container(
+                    margin: EdgeInsets.all(24),
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        const Text(
+                          'Go to Checkout',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Positioned(
+                          right: 16,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF489E64),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              '\$${context.read<CartCubit>().getTotalPrice().toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             );

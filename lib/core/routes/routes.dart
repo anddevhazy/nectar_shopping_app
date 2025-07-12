@@ -10,6 +10,7 @@ import 'package:grocery_mart/features/temp_placeholder/account_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/explore_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/favourite_screen.dart';
 import 'package:grocery_mart/features/temp_placeholder/order_accepted_screen.dart';
+import 'package:grocery_mart/features/temp_placeholder/test.dart';
 
 class Routes {
   static const String splashPath = '/splash';
@@ -39,6 +40,9 @@ class Routes {
   static const String orderAcceptedPath = '/orderAccepted';
   static const String orderAcceptedName = 'orderAccepted';
 
+  static const String testPath = '/test';
+  static const String testName = 'test';
+
   static final GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey<NavigatorState>();
   static final GlobalKey<NavigatorState> shellNavigatorKey =
@@ -48,6 +52,7 @@ class Routes {
     navigatorKey: rootNavigatorKey,
 
     initialLocation: splashPath,
+    // initialLocation: testPath,
     routes: [
       GoRoute(
         path: splashPath,
@@ -67,6 +72,11 @@ class Routes {
         path: onboardingPath,
         name: onboardingName,
         builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: testPath,
+        name: testName,
+        builder: (context, state) => const TestScreen(),
       ),
       ShellRoute(
         navigatorKey: shellNavigatorKey,
